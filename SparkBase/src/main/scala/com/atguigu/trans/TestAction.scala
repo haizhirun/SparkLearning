@@ -8,7 +8,7 @@ object TestAction {
     val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("TestAction")
     val sc = new SparkContext(conf)
 
-    val rdd: RDD[Int] = sc.makeRDD(1 to 10, 2)
+    /*al rdd: RDD[Int] = sc.makeRDD(1 to 10, 2)
 
     val result2: Int = rdd.reduce((x,y)=>(x+y))
     println(result2)
@@ -27,7 +27,17 @@ object TestAction {
       (x)=>{
         print(x + "\t")
       }
-    }
+    }*/
+
+    val nopar = sc.parallelize(List((1,3),(1,2),(2,4),(2,3),(3,6),(3,8)),8)
+
+    nopar.mapPartitionsWithIndex((index,iter)=>{
+      Iterator(index.toString + " " + iter.mkString("|"))
+    }).collect().foreach(println(_))
+
+    val hashpar = nopar.partitionBy(new org.apache.spark.HashPartitioner(7))
+    println(hashpar.count())
+
 
   }
 

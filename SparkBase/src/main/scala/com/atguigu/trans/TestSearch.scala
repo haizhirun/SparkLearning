@@ -13,7 +13,7 @@ object TestSearch {
 
     val search = new Search("a")
 
-    val filtered: RDD[String] = search.getMatch2(word)
+    val filtered: RDD[String] = search.getMatch1(word)
 
     filtered.foreach(println)
 

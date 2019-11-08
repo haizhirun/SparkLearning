@@ -2,7 +2,7 @@ package com.atguigu.trans
 
 import org.apache.spark.rdd.RDD
 
-class Search(query:String)  {
+class Search(query:String) extends Serializable {
 
   def isMatch(s:String)={
     s.contains(query)

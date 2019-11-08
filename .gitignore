@@ -13,7 +13,6 @@ tmp
 *.class
 *.iml
 *.swp
-*.log
 .DS_Store
 build-target
 tlassian-ide-plugin.xml

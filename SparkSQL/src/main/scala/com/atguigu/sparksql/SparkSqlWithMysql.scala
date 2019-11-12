@@ -15,7 +15,6 @@ object SparkSqlWithMysql {
     import spark.implicits._
 
     //定义jdbc相关参数信息
-    val conn = new Properties()
 
   }
 }

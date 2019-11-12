@@ -11,6 +11,10 @@ object SparkSqlWithHive {
       .appName("SparkSqlWithHive")
       .getOrCreate()
 
+    //spark.sql("show tables").show()
+    spark.sql("create table aa(id int) ").show()
+
+    spark.stop()
 
   }
 }

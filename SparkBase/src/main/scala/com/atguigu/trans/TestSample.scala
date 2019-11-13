@@ -9,7 +9,7 @@ object TestSample {
     val sc = new SparkContext(conf)
 
     val rdd: RDD[Int] = sc.parallelize(1 to 10)
-    val rdd1: RDD[Int] = rdd.sample(true,0.5,2)
+    val rdd1: RDD[Int] = rdd.sample(true,2,2)
     val rdd2: RDD[Int] = rdd.sample(false,0.5)
     val rdd3: RDD[Int] = rdd.sample(false,0.5,2)
     rdd1.collect().foreach(println)

@@ -12,25 +12,28 @@ object RDDStream {
 
     val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("RDDStream")
 
-    val ssc = new StreamingContext(conf,Seconds(5))
+    val ssc = new StreamingContext(conf,Seconds(2))
 
+    //创建rdd队列
     val rddQueue = new mutable.Queue[RDD[Int]]()
 
-    val inputStream: InputDStream[Int] = ssc.queueStream(rddQueue)
+    val inputStream: InputDStream[Int] = ssc.queueStream(rddQueue,oneAtATime = false)
 
+    inputStream.map(x => (x%10,1)).reduceByKey(_+_).print()
 
-    val reduceStream = inputStream.reduce(_+_)
-
-    reduceStream.print()
-
+    //启动任务
     ssc.start()
 
-    for(i <- 1 to 5){
-      rddQueue += ssc.sparkContext.makeRDD(1 to 100 , 10)
+    //循环创建并向rdd队列中放入rdd
+    for(i <- 0 to 10){
+      val inputRdd: RDD[Int] = ssc.sparkContext.makeRDD(1 to 100,2)
+      rddQueue += inputRdd
       Thread.sleep(2000)
     }
 
 
     ssc.awaitTermination()
+
+
   }
 }

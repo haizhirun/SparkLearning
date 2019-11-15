@@ -14,7 +14,6 @@ object HighKafkaSparkStreaming2 {
     //获取SSC
     val ssc: StreamingContext = StreamingContext.getActiveOrCreate("./ck1",()=>createSSC())
 
-
     ssc.start()
     ssc.awaitTermination()
   }
@@ -28,12 +27,13 @@ object HighKafkaSparkStreaming2 {
     ssc.checkpoint("./ck1")
 
     val brokers:String = "hadoop102:9092,hadoop103:9092,hadoop104:9092"
-    val topic : String = "first"
+    val topic : String = "sparkStreaming2kafka1"
     val group : String = "spark2kafka"
     val deserialization = "org.apache.kafka.common.serialization.StringDeserializer"
 
     //封装kafka
     val kafkaPara: Map[String, String] = Map[String, String](
+      "zookeeper.connect"->"hadoop102:2181,hadoop103:2181,hadoop104:2181/kafka",
       ConsumerConfig.GROUP_ID_CONFIG -> group,
       ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> brokers,
       ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG -> deserialization,

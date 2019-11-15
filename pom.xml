@@ -13,6 +13,7 @@
         <module>SparkStreaming</module>
         <module>SparkBase</module>
         <module>SparkCore</module>
+        <module>SparkBook</module>
     </modules>
 
     <dependencies>

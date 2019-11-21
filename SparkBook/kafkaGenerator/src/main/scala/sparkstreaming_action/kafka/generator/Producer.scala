@@ -5,6 +5,7 @@ import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.apache.kafka.common.serialization.StringSerializer
 
+import scala.io.{BufferedSource, Source}
 import scala.util.Random
 
 /**

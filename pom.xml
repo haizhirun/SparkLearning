@@ -14,6 +14,7 @@
         <module>SparkBase</module>
         <module>SparkCore</module>
         <module>SparkBook</module>
+        <module>SparkStreamingAction</module>
     </modules>
 
     <dependencies>

@@ -38,5 +38,7 @@ object WordCountWithState {
     val currentValue: Int = values.foldLeft(0)(_+_)
     val previous: Int = state.getOrElse(0)
     Some(currentValue + previous)
+    //总结为一句
+    //Some(values.foldLeft(state.getOrElse(0))(_+_))
   }
 }
